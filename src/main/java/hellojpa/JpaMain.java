@@ -16,11 +16,14 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member1 = new Member(150L, "A");
-            Member member2 = new Member(160L, "B");
+            //member가 영속 상태가 됨
+            Member member = em.find(Member.class, 150L);
 
-            em.persist(member1);
-            em.persist(member2);
+            //dirty check
+            member.setName("AAA");
+
+            //준영속 상태(영속성 컨텍스트에서 분리) 위의 변경이 반영되지 않음.
+            em.detach(member);
 
             tx.commit();
         } catch (Exception exception) {
