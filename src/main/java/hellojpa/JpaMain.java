@@ -14,17 +14,8 @@ public class JpaMain {
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-
+        
         try {
-            //member가 영속 상태가 됨
-            Member member = em.find(Member.class, 150L);
-
-            //dirty check
-            member.setName("AAA");
-
-            //준영속 상태(영속성 컨텍스트에서 분리) 위의 변경이 반영되지 않음.
-            em.detach(member);
-
             tx.commit();
         } catch (Exception exception) {
             tx.rollback();
