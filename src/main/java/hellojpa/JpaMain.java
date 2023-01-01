@@ -14,8 +14,18 @@ public class JpaMain {
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        
+
         try {
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            //회원 저장
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team);
+            em.persist(member);
+
             tx.commit();
         } catch (Exception exception) {
             tx.rollback();
