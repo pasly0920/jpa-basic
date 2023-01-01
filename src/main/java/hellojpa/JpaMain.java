@@ -23,7 +23,7 @@ public class JpaMain {
             //회원 저장
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeam(team);
+            member.changeTeam(team); //연관관계 편의 메서드 도입
             em.persist(member);
 
             tx.commit();
