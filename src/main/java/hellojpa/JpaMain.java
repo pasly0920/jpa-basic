@@ -1,5 +1,6 @@
 package hellojpa;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -16,15 +17,13 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
+            List<Member> result = em.createQuery(
+                            "select m from Member m where m.username like 'kim'", Member.class)
+                    .getResultList();
 
-            //회원 저장
-            Member member = new Member();
-            member.setUsername("member1");
-            member.changeTeam(team); //연관관계 편의 메서드 도입
-            em.persist(member);
+            for (Member member : result) {
+                System.out.println("member = " + member);
+            }
 
             tx.commit();
         } catch (Exception exception) {
