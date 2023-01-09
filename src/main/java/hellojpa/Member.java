@@ -60,9 +60,7 @@ public class Member extends BaseEntity {
 
     @Embedded
     private Period workPeriod;
-
-    @Embedded
-    private Address homeAddress;
+    
 
     public void changeTeam(Team team) {
         this.team = team;
